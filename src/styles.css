@@ -9,7 +9,9 @@
 @source "../src";
 @import "tw-animate-css";
 
+/* Dark is the default theme: <html class="dark">. Removing the class switches to light. */
 @custom-variant dark (&:is(.dark *));
+@custom-variant light (&:is(:root:not(.dark) *));
 
 /* Brand display face — Brice Regular, served from Lovable Assets. */
 @font-face {
@@ -22,13 +24,14 @@
 }
 
 /*
- * Ascent Design system — dark navy canvas, white type, blue for action, pink as a rare accent.
- * Brand: Primary Blue #0593C6, White #FCFFFF, Accent Pink #D83995,
- * Deep Navy #080E18, Secondary Navy #101C2B, Muted #A6B2C2.
+ * Ascent Design system.
+ * Brand palette: Blue #0593C6 (action), White #FCFFFF, Pink #D83995 (rare accent).
+ * Dark theme: near-black night-sky navy. Light theme: brand white with navy ink.
  */
 @theme inline {
-  --font-display: "Brice", "Fraunces", Georgia, serif;
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Brice", "Rethink Sans", ui-sans-serif, sans-serif;
+  --font-sans: "Rethink Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -39,6 +42,10 @@
   --radius-4xl: calc(var(--radius) + 16px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-hairline: var(--hairline);
+  --color-pink: var(--pink);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -52,11 +59,6 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-pink: var(--pink);
-  --color-navy-deep: var(--navy-deep);
-  --color-navy: var(--navy);
-  --color-navy-raised: var(--navy-raised);
-  --color-hairline: var(--hairline);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -78,56 +80,91 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* ---------- Light theme ---------- */
 :root {
+  color-scheme: light;
   --radius: 0.875rem;
 
-  --navy-deep: oklch(0.163 0.023 259.9);
-  --navy: oklch(0.223 0.034 254.5);
-  --navy-raised: oklch(0.265 0.044 254.6);
-  --white: oklch(0.998 0.003 197.1);
   --blue: oklch(0.623 0.127 232.2);
+  --white: oklch(0.998 0.003 197.1);
   --pink: oklch(0.61 0.212 349.8);
-  --hairline: oklch(0.998 0.003 197.1 / 10%);
+  --ink: oklch(0.163 0.023 259.9);
 
-  --background: var(--navy-deep);
-  --foreground: var(--white);
-  --card: oklch(0.193 0.03 255.4);
-  --card-foreground: var(--white);
-  --popover: var(--navy);
-  --popover-foreground: var(--white);
+  --background: var(--white);
+  --foreground: var(--ink);
+  --surface: oklch(0.977 0.007 225);
+  --surface-raised: oklch(0.945 0.013 228);
+  --hairline: oklch(0.163 0.023 259.9 / 10%);
+
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--white);
+  --popover-foreground: var(--ink);
   --primary: var(--blue);
   --primary-foreground: var(--white);
-  --primary-glow: oklch(0.72 0.13 225);
-  --secondary: var(--navy);
-  --secondary-foreground: var(--white);
-  --muted: var(--navy);
-  --muted-foreground: oklch(0.759 0.027 255.6);
-  --accent: var(--navy-raised);
-  --accent-foreground: var(--white);
-  --destructive: oklch(0.65 0.2 25);
+  --primary-glow: oklch(0.7 0.13 228);
+  --secondary: var(--surface);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface);
+  --muted-foreground: oklch(0.46 0.03 255);
+  --accent: var(--surface-raised);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.58 0.22 25);
   --destructive-foreground: var(--white);
   --border: var(--hairline);
-  --input: oklch(0.998 0.003 197.1 / 14%);
+  --input: oklch(0.163 0.023 259.9 / 14%);
   --ring: var(--blue);
   --chart-1: var(--blue);
   --chart-2: var(--pink);
-  --chart-3: oklch(0.759 0.027 255.6);
-  --chart-4: oklch(0.72 0.13 225);
+  --chart-3: oklch(0.6 0.03 255);
+  --chart-4: oklch(0.7 0.13 228);
   --chart-5: oklch(0.45 0.05 255);
-  --sidebar: var(--navy);
-  --sidebar-foreground: var(--white);
+  --sidebar: var(--surface);
+  --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--blue);
   --sidebar-primary-foreground: var(--white);
-  --sidebar-accent: var(--navy-raised);
-  --sidebar-accent-foreground: var(--white);
+  --sidebar-accent: var(--surface-raised);
+  --sidebar-accent-foreground: var(--ink);
   --sidebar-border: var(--hairline);
   --sidebar-ring: var(--blue);
 
-  --gradient-brand: linear-gradient(120deg, var(--blue) 0%, var(--pink) 100%);
-  --gradient-card: linear-gradient(180deg, oklch(0.223 0.034 254.5 / 70%), oklch(0.193 0.03 255.4 / 40%));
-  --shadow-glow: 0 10px 40px -12px color-mix(in oklab, var(--blue) 70%, transparent);
-  --shadow-glow-strong: 0 14px 50px -10px color-mix(in oklab, var(--blue) 90%, transparent);
-  --shadow-mockup: 0 40px 80px -30px oklch(0 0 0 / 75%), 0 0 0 1px var(--hairline);
+  --glow-strength: 0.45;
+  --star-opacity: 0;
+  --card-highlight: oklch(1 0 0 / 80%);
+  --shadow-card: 0 1px 2px oklch(0.163 0.023 259.9 / 4%), 0 20px 50px -30px oklch(0.163 0.023 259.9 / 25%);
+  --shadow-mockup: 0 30px 60px -30px oklch(0.163 0.023 259.9 / 35%), 0 0 0 1px var(--hairline);
+}
+
+/* ---------- Dark theme (default) ---------- */
+.dark {
+  color-scheme: dark;
+  --background: oklch(0.135 0.03 263);
+  --foreground: var(--white);
+  --surface: oklch(0.175 0.038 262);
+  --surface-raised: oklch(0.225 0.045 260);
+  --hairline: oklch(0.8 0.06 240 / 13%);
+
+  --card: var(--surface);
+  --card-foreground: var(--white);
+  --popover: oklch(0.175 0.038 262);
+  --popover-foreground: var(--white);
+  --secondary: var(--surface);
+  --secondary-foreground: var(--white);
+  --muted: var(--surface);
+  --muted-foreground: oklch(0.74 0.03 255);
+  --accent: var(--surface-raised);
+  --accent-foreground: var(--white);
+  --input: oklch(0.998 0.003 197.1 / 14%);
+  --sidebar: var(--surface);
+  --sidebar-foreground: var(--white);
+  --sidebar-accent: var(--surface-raised);
+  --sidebar-accent-foreground: var(--white);
+
+  --glow-strength: 1;
+  --star-opacity: 0.7;
+  --card-highlight: oklch(1 0 0 / 6%);
+  --shadow-card: 0 30px 60px -40px oklch(0 0 0 / 80%);
+  --shadow-mockup: 0 40px 80px -30px oklch(0 0 0 / 80%), 0 0 0 1px var(--hairline);
 }
 
 @layer base {
@@ -137,7 +174,7 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 6.5rem;
   }
 
   body {
@@ -145,10 +182,13 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    transition:
+      background-color 0.4s ease,
+      color 0.4s ease;
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--pink) 45%, transparent);
+    background: color-mix(in oklab, var(--pink) 40%, transparent);
   }
 
   :focus-visible {
@@ -157,60 +197,95 @@
   }
 }
 
-/* Typography */
+/* ---------- Typography ---------- */
 @utility font-display {
   font-family: var(--font-display);
   font-weight: 400;
-  letter-spacing: -0.02em;
-}
-
-@utility eyebrow {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--blue);
+  letter-spacing: -0.015em;
 }
 
 @utility text-gradient-brand {
-  background: var(--gradient-brand);
+  background: linear-gradient(110deg, var(--blue) 10%, var(--pink) 95%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Surfaces */
-@utility surface-card {
-  background: var(--gradient-card);
+/* ---------- Surfaces ---------- */
+@utility card-premium {
+  position: relative;
+  background: linear-gradient(180deg, var(--surface), color-mix(in oklab, var(--surface) 55%, var(--background)));
   border: 1px solid var(--hairline);
-  border-radius: var(--radius-2xl);
+  border-radius: var(--radius-3xl);
+  box-shadow:
+    inset 0 1px 0 0 var(--card-highlight),
+    var(--shadow-card);
 }
 
-@utility shadow-glow {
-  box-shadow: var(--shadow-glow);
-}
-
-@utility shadow-glow-strong {
-  box-shadow: var(--shadow-glow-strong);
+@utility pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--hairline);
+  border-radius: 9999px;
+  background: color-mix(in oklab, var(--surface) 80%, transparent);
+  padding: 0.3rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 @utility shadow-mockup {
   box-shadow: var(--shadow-mockup);
 }
 
-@utility bg-gradient-brand {
-  background: var(--gradient-brand);
+@utility shadow-glow {
+  box-shadow: 0 10px 36px -10px color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 75%), transparent);
 }
 
-/* Ambient lighting — restrained cyan + magenta pools */
+@utility bg-brand-button {
+  background: linear-gradient(180deg, var(--primary-glow), var(--blue));
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 25%),
+    0 10px 30px -10px color-mix(in oklab, var(--blue) 70%, transparent);
+}
+
+@utility bg-gradient-brand {
+  background: linear-gradient(110deg, var(--blue), var(--pink));
+}
+
+/* ---------- Atmosphere ---------- */
+@utility starfield {
+  opacity: var(--star-opacity);
+  background-image:
+    radial-gradient(1px 1px at 23px 41px, oklch(1 0 0 / 90%), transparent),
+    radial-gradient(1px 1px at 141px 88px, oklch(1 0 0 / 60%), transparent),
+    radial-gradient(1.5px 1.5px at 67px 163px, oklch(1 0 0 / 80%), transparent),
+    radial-gradient(1px 1px at 201px 201px, oklch(1 0 0 / 50%), transparent),
+    radial-gradient(1px 1px at 101px 247px, oklch(1 0 0 / 70%), transparent),
+    radial-gradient(1.5px 1.5px at 251px 31px, oklch(0.85 0.08 230 / 80%), transparent),
+    radial-gradient(1px 1px at 283px 141px, oklch(1 0 0 / 40%), transparent);
+  background-size: 300px 300px;
+}
+
+/* The glowing "planet horizon" arc. Place on a large square element; only the top edge shows. */
+@utility horizon {
+  border-radius: 50%;
+  background: var(--background);
+  box-shadow:
+    0 -1px 0 0 color-mix(in oklab, var(--blue) 55%, white),
+    0 -10px 40px 0 color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 75%), transparent),
+    0 -40px 120px 10px color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 40%), transparent),
+    0 -90px 220px 40px color-mix(in oklab, var(--pink) calc(var(--glow-strength) * 16%), transparent),
+    inset 0 40px 90px -50px color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 60%), transparent);
+}
+
 @utility glow-blue {
-  background: radial-gradient(closest-side, color-mix(in oklab, var(--blue) 38%, transparent), transparent);
+  background: radial-gradient(closest-side, color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 32%), transparent), transparent);
   filter: blur(20px);
 }
 
 @utility glow-pink {
-  background: radial-gradient(closest-side, color-mix(in oklab, var(--pink) 28%, transparent), transparent);
+  background: radial-gradient(closest-side, color-mix(in oklab, var(--pink) calc(var(--glow-strength) * 22%), transparent), transparent);
   filter: blur(24px);
 }
 
@@ -218,11 +293,18 @@
   background-image:
     linear-gradient(var(--hairline) 1px, transparent 1px),
     linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  background-size: 44px 44px;
 }
 
-/* Scroll reveal */
+@utility stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 7px,
+    var(--hairline) 7px 8px
+  );
+}
+
+/* ---------- Motion ---------- */
 @utility reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -232,6 +314,12 @@
   &[data-visible="true"] {
     opacity: 1;
     transform: none;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
   }
 }
 
@@ -245,27 +333,25 @@
   }
 }
 
-@keyframes spin-slow {
-  to {
-    transform: rotate(360deg);
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--pink) 60%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 8px transparent;
   }
 }
 
-@keyframes draw-line {
-  from {
-    transform: scaleY(0);
-  }
-  to {
-    transform: scaleY(1);
-  }
+@utility animate-marquee {
+  animation: marquee 70s linear infinite;
 }
 
 @utility animate-float-slow {
   animation: float-slow 7s ease-in-out infinite;
 }
 
-@utility animate-spin-slow {
-  animation: spin-slow 40s linear infinite;
+@utility animate-pulse-ring {
+  animation: pulse-ring 2s ease-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
