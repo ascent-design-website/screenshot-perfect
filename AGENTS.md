@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Single-page marketing site: sections live in `src/components/site/*` and are composed in `src/routes/index.tsx`; nav uses in-page anchors because the brief asks for smooth scrolling between sections.
+- Plans, FAQ, testimonials and the email-CTA builder live in `src/lib/site.ts` so copy and prices change in one place; `src/test/pricing.test.ts` guards the prices.
+- Every conversion button uses `buildMailto()` (no forms/backends) — the brief requires the visitor's email app.
+- Testimonials section renders only when `TESTIMONIALS` has real entries — never add invented quotes.
+- Brand images and the Brice font are Lovable Assets pointers in `src/assets/`; the light wordmark is a recolored copy of the uploaded logo for dark backgrounds.

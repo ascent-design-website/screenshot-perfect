@@ -75,27 +75,47 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
-    // Replace these placeholders with the app's name and description when first building the app.
-    // Each content route, / included, must still set its own head(). Never add og:image or
+    // Each content route, / included, sets its own head(). Never add og:image or
     // twitter:image here: every page without its own would inherit the root's preview image.
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { name: "theme-color", content: "#080E18" },
+      { title: "Ascent Design | Professional Websites for Local Businesses" },
+      {
+        name: "description",
+        content:
+          "Professional websites and strategic digital content for local businesses across the United States.",
+      },
+      { name: "author", content: "Ascent Design" },
+      { property: "og:site_name", content: "Ascent Design" },
+      { property: "og:title", content: "Ascent Design" },
+      {
+        property: "og:description",
+        content: "Professional websites and strategic digital content for local businesses.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap",
+      },
+      {
+        rel: "preload",
+        href: "/__l5e/assets-v1/6df4d6e1-e87d-4a92-a8b1-f397c16eba8a/Brice-Regular.otf",
+        as: "font",
+        type: "font/otf",
+        crossOrigin: "anonymous",
+      },
     ],
   }),
   shellComponent: RootShell,
