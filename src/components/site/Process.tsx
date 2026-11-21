@@ -1,60 +1,31 @@
+import { useI18n } from "@/lib/i18n";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 
-const STEPS = [
-  {
-    title: "Discovery",
-    text: "We learn about your business, goals, services, audience, and visual preferences.",
-  },
-  {
-    title: "Strategy & Direction",
-    text: "We define the website structure, visual direction, content, and overall experience.",
-  },
-  {
-    title: "Design & Development",
-    text: "We transform the strategy into a professional, responsive website tailored to your business.",
-  },
-  {
-    title: "Review & Refinement",
-    text: "You review the website and share feedback so we can refine the final experience.",
-  },
-  {
-    title: "Launch",
-    text: "After approval, we prepare your website for launch and complete the final quality checks.",
-  },
-  {
-    title: "Ongoing Support",
-    text: "We continue supporting your digital presence through the maintenance and content services included in your selected plan.",
-  },
-];
-
 export function Process() {
+  const { t } = useI18n();
   return (
-    <section id="process" className="relative overflow-hidden border-y border-hairline bg-navy py-24 sm:py-32">
-      <div className="glow-pink absolute top-1/3 right-[-10%] h-[420px] w-[420px] opacity-70" aria-hidden="true" />
-      <div className="relative mx-auto grid max-w-7xl gap-16 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="lg:sticky lg:top-32 lg:self-start">
-          <SectionHeading
-            eyebrow="Our Process"
-            title="A Simple Process. A Better Website."
-            text="We make building your professional online presence straightforward and collaborative."
-          />
-        </div>
-
-        <ol className="relative">
-          <span
-            className="absolute top-2 bottom-2 left-[1.45rem] w-px origin-top bg-gradient-to-b from-primary via-primary/40 to-pink/60"
-            aria-hidden="true"
-          />
-          {STEPS.map((s, i) => (
-            <Reveal as="li" key={s.title} delay={i * 60} className="group relative flex gap-7 pb-12 last:pb-0">
-              <span className="relative z-10 inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-hairline bg-navy-deep font-display text-base text-primary transition-all duration-500 group-hover:border-primary group-hover:shadow-glow">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="pt-1.5">
-                <h3 className="font-display text-2xl sm:text-3xl">{s.title}</h3>
-                <p className="mt-3 max-w-lg leading-relaxed text-muted-foreground">{s.text}</p>
+    <section id="process" className="relative overflow-hidden py-24 sm:py-32">
+      <div className="starfield absolute inset-x-0 top-0 h-[420px] [mask-image:linear-gradient(black,transparent)]" aria-hidden="true" />
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+        <SectionHeading title={t.process.title} text={t.process.text} />
+        <ol className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {t.process.steps.map((s, i) => (
+            <Reveal as="li" key={s.title} delay={(i % 3) * 90} className="group card-premium overflow-hidden p-8 transition-all duration-500 hover:-translate-y-1 hover:border-primary/40">
+              <div
+                className="grid-lines pointer-events-none absolute top-0 right-0 h-40 w-56 [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_70%)]"
+                aria-hidden="true"
+              />
+              <div className="relative flex items-start justify-between gap-4">
+                <span className="font-display text-5xl text-primary/80 transition-colors duration-500 group-hover:text-primary">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="pill">
+                  {t.process.step} {String(i + 1).padStart(2, "0")}
+                </span>
               </div>
+              <h3 className="relative mt-10 text-xl font-semibold tracking-tight">{s.title}</h3>
+              <p className="relative mt-3 leading-relaxed text-muted-foreground">{s.text}</p>
             </Reveal>
           ))}
         </ol>
