@@ -9,7 +9,6 @@ import { FinalCta } from "@/components/site/FinalCta";
 import { Footer } from "@/components/site/Footer";
 import { Hero } from "@/components/site/Hero";
 import { Navbar } from "@/components/site/Navbar";
-import { Portfolio } from "@/components/site/Portfolio";
 import { Pricing } from "@/components/site/Pricing";
 import { Process } from "@/components/site/Process";
 import { Services } from "@/components/site/Services";
@@ -51,7 +50,6 @@ function Index() {
       <Navbar />
       <main id="main">
         <Hero />
-        <Portfolio />
         <Statement />
         <WhyChoose />
         <Process />

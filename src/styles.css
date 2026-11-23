@@ -135,23 +135,23 @@
   --shadow-mockup: 0 30px 60px -30px oklch(0.163 0.023 259.9 / 35%), 0 0 0 1px var(--hairline);
 }
 
-/* ---------- Dark theme (default) ---------- */
+/* ---------- Dark theme (default): true black #08090A ---------- */
 .dark {
   color-scheme: dark;
-  --background: oklch(0.135 0.03 263);
+  --background: oklch(0.139 0.003 246);
   --foreground: var(--white);
-  --surface: oklch(0.175 0.038 262);
-  --surface-raised: oklch(0.225 0.045 260);
-  --hairline: oklch(0.8 0.06 240 / 13%);
+  --surface: oklch(0.178 0.006 260);
+  --surface-raised: oklch(0.225 0.009 260);
+  --hairline: oklch(1 0 0 / 9%);
 
   --card: var(--surface);
   --card-foreground: var(--white);
-  --popover: oklch(0.175 0.038 262);
+  --popover: oklch(0.178 0.006 260);
   --popover-foreground: var(--white);
   --secondary: var(--surface);
   --secondary-foreground: var(--white);
   --muted: var(--surface);
-  --muted-foreground: oklch(0.74 0.03 255);
+  --muted-foreground: oklch(0.72 0.012 250);
   --accent: var(--surface-raised);
   --accent-foreground: var(--white);
   --input: oklch(0.998 0.003 197.1 / 14%);
@@ -161,10 +161,10 @@
   --sidebar-accent-foreground: var(--white);
 
   --glow-strength: 1;
-  --star-opacity: 0.7;
+  --star-opacity: 0.6;
   --card-highlight: oklch(1 0 0 / 6%);
-  --shadow-card: 0 30px 60px -40px oklch(0 0 0 / 80%);
-  --shadow-mockup: 0 40px 80px -30px oklch(0 0 0 / 80%), 0 0 0 1px var(--hairline);
+  --shadow-card: 0 30px 60px -40px oklch(0 0 0 / 90%);
+  --shadow-mockup: 0 40px 80px -30px oklch(0 0 0 / 90%), 0 0 0 1px var(--hairline);
 }
 
 @layer base {
@@ -270,13 +270,22 @@
 /* The glowing "planet horizon" arc. Place on a large square element; only the top edge shows. */
 @utility horizon {
   border-radius: 50%;
-  background: var(--background);
+  background:
+    radial-gradient(48% 14% at 50% 0%, color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 22%), transparent), transparent),
+    var(--background);
   box-shadow:
-    0 -1px 0 0 color-mix(in oklab, var(--blue) 55%, white),
-    0 -10px 40px 0 color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 75%), transparent),
-    0 -40px 120px 10px color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 40%), transparent),
-    0 -90px 220px 40px color-mix(in oklab, var(--pink) calc(var(--glow-strength) * 16%), transparent),
-    inset 0 40px 90px -50px color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 60%), transparent);
+    0 -1px 0 0 color-mix(in oklab, var(--blue) 45%, white),
+    0 -6px 24px 0 color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 80%), transparent),
+    0 -30px 90px 0 color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 45%), transparent),
+    0 -80px 200px 30px color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 18%), transparent),
+    inset 0 2px 6px 0 color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 70%), transparent),
+    inset 0 30px 80px -40px color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 55%), transparent);
+}
+
+/* Soft light pooling above the horizon crest. */
+@utility horizon-halo {
+  background: radial-gradient(50% 60% at 50% 100%, color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 26%), transparent), transparent 70%);
+  filter: blur(10px);
 }
 
 @utility glow-blue {

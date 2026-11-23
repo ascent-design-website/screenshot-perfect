@@ -22,7 +22,7 @@ export const en = {
     text: "We create professional websites and powerful digital content that help local businesses build credibility, attract customers, and grow online.",
     cta: "I Want My Professional Website",
     secondary: "Explore Our Services",
-    statement: "Custom Websites. Strategic Content. Built for Business Growth.",
+    badge: "Websites & digital content for local businesses",
   },
   portfolio: {
     title: "Digital Experiences Designed to Make an Impact.",

@@ -24,7 +24,7 @@ export const es: Dict = {
     text: "Creamos sitios web profesionales y contenido digital de impacto que ayudan a los negocios locales a generar credibilidad, atraer clientes y crecer en línea.",
     cta: "Quiero Mi Sitio Web Profesional",
     secondary: "Conoce Nuestros Servicios",
-    statement: "Sitios a Medida. Contenido Estratégico. Hechos para Hacer Crecer Tu Negocio.",
+    badge: "Sitios web y contenido digital para negocios locales",
   },
   portfolio: {
     title: "Experiencias Digitales Diseñadas para Causar Impacto.",

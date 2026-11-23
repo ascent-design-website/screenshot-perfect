@@ -8,7 +8,12 @@
 - [x] Verify in browser (desktop + mobile)
 
 ## Round 2 (user feedback)
-- [ ] Remove all eyebrow phrases (line + uppercase label) above headings
-- [ ] Premium redesign closer to mavericksocials.com (palette #0593C6 / #FCFFFF / #D83995)
-- [ ] Translations: English, Portuguese, Spanish with language switcher
-- [ ] Light/dark theme toggle
+- [x] Remove all eyebrow phrases (line + uppercase label) above headings
+- [x] Premium redesign closer to mavericksocials.com (palette #0593C6 / #FCFFFF / #D83995)
+- [x] Translations: English, Portuguese, Spanish with language switcher
+- [x] Light/dark theme toggle
+
+## Round 3
+- [x] Hero redesign closer to reference (badge, 2-line title, glowing horizon, project showcase in hero)
+- [x] Remove hero tagline line
+- [x] Dark theme background black (#08090A, awaiting confirmation of exact hex)
