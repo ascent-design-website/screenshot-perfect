@@ -1,17 +1,19 @@
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
 import { buildMailto } from "@/lib/site";
+import { FallingStars } from "./FallingStars";
 import { Showcase } from "./Portfolio";
 
 export function Hero() {
   const { t } = useI18n();
 
   return (
-    <section id="home" className="relative isolate overflow-hidden pt-36 pb-20 sm:pt-48 sm:pb-28">
+    <section id="home" className="relative isolate overflow-hidden pt-52 pb-20 sm:pt-64 sm:pb-28">
       {/* Night sky, corner glows and the glowing planet horizon */}
       <div className="starfield absolute inset-0 -z-30" aria-hidden="true" />
+      <FallingStars className="absolute inset-x-0 top-0 -z-20 h-[640px]" />
       <div className="glow-blue absolute -top-24 -left-40 -z-20 size-[520px]" aria-hidden="true" />
       <div className="glow-blue absolute -top-24 -right-40 -z-20 size-[520px]" aria-hidden="true" />
       <div className="horizon-halo absolute top-0 left-1/2 -z-20 h-[360px] w-[1200px] -translate-x-1/2" aria-hidden="true" />
@@ -21,18 +23,8 @@ export function Hero() {
       />
 
       <div className="mx-auto max-w-5xl px-5 text-center sm:px-8">
-        <a
-          href="#services"
-          className="group mx-auto inline-flex max-w-full animate-in items-center gap-3 rounded-full border border-hairline bg-surface/60 py-1.5 pr-1.5 pl-4 text-[0.8rem] sm:text-sm text-muted-foreground shadow-[inset_0_1px_0_0_var(--card-highlight)] backdrop-blur-xl transition-colors duration-1000 fade-in slide-in-from-bottom-4 hover:text-foreground sm:text-[0.95rem]"
-        >
-          <span className="text-left leading-snug">{t.hero.badge}</span>
-          <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform duration-300 group-hover:translate-x-0.5">
-            <ArrowRight className="size-4" />
-          </span>
-        </a>
-
-        <h1 className="mx-auto mt-8 max-w-5xl animate-in font-display text-[2.5rem] leading-[1.06] text-balance delay-100 duration-1000 fill-mode-both fade-in slide-in-from-bottom-6 sm:text-6xl lg:text-[4.25rem]">
-          {t.hero.titleBefore} <span className="text-gradient-brand">{t.hero.titleHighlight}</span>
+        <h1 className="mx-auto max-w-5xl animate-in font-display text-[2.5rem] leading-[1.06] text-balance delay-100 duration-1000 fill-mode-both fade-in slide-in-from-bottom-6 sm:text-6xl lg:text-[4.25rem]">
+          {t.hero.titleBefore} <span className="text-primary">{t.hero.titleHighlight}</span>
           {t.hero.titleAfter ? ` ${t.hero.titleAfter}` : ""}
         </h1>
         <p className="mx-auto mt-7 max-w-xl animate-in text-base leading-relaxed text-pretty text-muted-foreground delay-200 duration-1000 fill-mode-both fade-in slide-in-from-bottom-6 sm:text-lg">

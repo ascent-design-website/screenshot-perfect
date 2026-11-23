@@ -19,7 +19,7 @@ function PlanCard({ plan, index }: { plan: Plan; index: number }) {
       as="article"
       className={cn(
         "group card-premium flex flex-col p-7 transition-all duration-500 hover:-translate-y-1 sm:p-8",
-        annual && "border-transparent [background:linear-gradient(var(--surface),var(--surface))_padding-box,linear-gradient(140deg,var(--blue),var(--pink))_border-box] shadow-glow",
+        annual && "border-pink/60 shadow-glow-pink",
         featured && "border-primary/50 shadow-glow",
         !annual && !featured && "hover:border-foreground/20",
       )}
@@ -28,7 +28,7 @@ function PlanCard({ plan, index }: { plan: Plan; index: number }) {
         <span
           className={cn(
             "absolute -top-3.5 left-7 rounded-full px-3.5 py-1 text-[0.68rem] font-bold tracking-[0.12em] text-primary-foreground uppercase",
-            annual ? "bg-gradient-brand" : "bg-brand-button",
+            annual ? "bg-pink" : "bg-brand-button",
           )}
         >
           {copy.badge}
@@ -40,23 +40,14 @@ function PlanCard({ plan, index }: { plan: Plan; index: number }) {
 
       <div className="mt-6 rounded-2xl border border-hairline bg-background/50 p-5">
         <div className="flex flex-wrap items-baseline gap-x-2">
-          <span className="font-display text-5xl tracking-tight">{formatUSD(plan.oneTime)}</span>
-          <span className="text-sm text-muted-foreground">{t.pricing.oneTime}</span>
+          <span className="font-display text-5xl tracking-tight">{formatUSD(plan.price)}</span>
+          <span className="text-sm text-muted-foreground">
+            {plan.billing === "monthly" ? t.pricing.perMonth : t.pricing.oneTime}
+          </span>
         </div>
-        {plan.monthly !== null ? (
-          <div className="mt-3">
-            <p className="flex items-baseline gap-1 whitespace-nowrap">
-              <span className="text-xl font-semibold">+ {formatUSD(plan.monthly)}</span>
-              <span className="text-sm text-muted-foreground">{t.pricing.perMonth}</span>
-            </p>
-            <p className="mt-0.5 text-xs text-muted-foreground">{t.pricing.maintenance}</p>
-          </div>
-        ) : (
-          <div className="mt-3">
-            <p className="text-xl font-semibold text-pink">{t.pricing.noMonthly}</p>
-            <p className="mt-0.5 text-xs text-muted-foreground">{t.pricing.noMonthlyNote}</p>
-          </div>
-        )}
+        <p className={cn("mt-3 text-sm font-medium", annual ? "text-pink" : "text-muted-foreground")}>
+          {plan.billing === "monthly" ? t.pricing.monthlyNote : t.pricing.oneTimeNote}
+        </p>
       </div>
 
       <ul className="mt-7 flex-1 space-y-3.5">
@@ -65,7 +56,7 @@ function PlanCard({ plan, index }: { plan: Plan; index: number }) {
             <span
               className={cn(
                 "mt-0.5 inline-flex size-4.5 shrink-0 items-center justify-center rounded-full text-primary-foreground",
-                annual ? "bg-gradient-brand" : "bg-primary",
+                annual ? "bg-pink" : "bg-primary",
               )}
             >
               <Check className="size-2.5" strokeWidth={3.5} />
@@ -104,13 +95,13 @@ export function Pricing() {
         <Reveal className="mx-auto mt-10 flex w-fit max-w-full flex-col gap-3 rounded-3xl border border-hairline bg-surface/60 px-5 py-3 text-sm backdrop-blur sm:flex-row sm:gap-8 sm:rounded-full">
           <span className="flex items-center gap-2.5">
             <span className="size-2 rounded-full bg-primary" aria-hidden="true" />
-            <strong className="font-semibold">{t.pricing.legendOneTime}</strong>
-            <span className="text-muted-foreground">{t.pricing.legendOneTimeText}</span>
-          </span>
-          <span className="flex items-center gap-2.5">
-            <span className="size-2 rounded-full bg-foreground/40" aria-hidden="true" />
             <strong className="font-semibold">{t.pricing.legendMonthly}</strong>
             <span className="text-muted-foreground">{t.pricing.legendMonthlyText}</span>
+          </span>
+          <span className="flex items-center gap-2.5">
+            <span className="size-2 rounded-full bg-pink" aria-hidden="true" />
+            <strong className="font-semibold">{t.pricing.legendOneTime}</strong>
+            <span className="text-muted-foreground">{t.pricing.legendOneTimeText}</span>
           </span>
         </Reveal>
 

@@ -135,10 +135,10 @@
   --shadow-mockup: 0 30px 60px -30px oklch(0.163 0.023 259.9 / 35%), 0 0 0 1px var(--hairline);
 }
 
-/* ---------- Dark theme (default): true black #08090A ---------- */
+/* ---------- Dark theme (default): black #08080B ---------- */
 .dark {
   color-scheme: dark;
-  --background: oklch(0.139 0.003 246);
+  --background: oklch(0.136 0.007 285.5);
   --foreground: var(--white);
   --surface: oklch(0.178 0.006 260);
   --surface-raised: oklch(0.225 0.009 260);
@@ -204,13 +204,6 @@
   letter-spacing: -0.015em;
 }
 
-@utility text-gradient-brand {
-  background: linear-gradient(110deg, var(--blue) 10%, var(--pink) 95%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 /* ---------- Surfaces ---------- */
 @utility card-premium {
   position: relative;
@@ -249,8 +242,46 @@
     0 10px 30px -10px color-mix(in oklab, var(--blue) 70%, transparent);
 }
 
-@utility bg-gradient-brand {
-  background: linear-gradient(110deg, var(--blue), var(--pink));
+@utility shadow-glow-pink {
+  box-shadow: 0 10px 36px -12px color-mix(in oklab, var(--pink) calc(var(--glow-strength) * 60%), transparent);
+}
+
+/* Falling star dots behind the hero planet (see FallingStars.tsx). */
+.falling-stars {
+  opacity: calc(var(--star-opacity) * 1.6);
+}
+
+.falling-star {
+  position: absolute;
+  top: 0;
+  border-radius: 9999px;
+  background: oklch(1 0 0);
+  box-shadow: 0 0 6px 1px oklch(1 0 0 / 45%);
+  opacity: 0;
+  animation: star-fall var(--duration) linear var(--delay) infinite;
+}
+
+@keyframes star-fall {
+  0% {
+    transform: translate3d(0, -24px, 0);
+    opacity: 0;
+  }
+  12%,
+  80% {
+    opacity: var(--peak);
+  }
+  100% {
+    transform: translate3d(var(--drift), var(--distance), 0);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .falling-star {
+    animation: none;
+    opacity: var(--peak);
+    transform: translate3d(0, calc(var(--distance) * 0.3), 0);
+  }
 }
 
 /* ---------- Atmosphere ---------- */

@@ -22,21 +22,23 @@ export function buildMailto(email: Dict["email"] = en.email, preferredPackage = 
 export const SECTION_IDS = ["home", "services", "process", "pricing", "about", "faq"] as const;
 export type SectionId = (typeof SECTION_IDS)[number];
 
-export type PlanId = "essential" | "growth" | "growth-plus" | "complete";
+export type PlanId = "essential" | "growth" | "premium" | "complete";
 
 export type Plan = {
   id: PlanId;
-  oneTime: number;
-  monthly: number | null;
+  price: number;
+  billing: "monthly" | "one-time";
+  /** Months of service covered by a one-time payment. */
+  includedMonths?: number;
   emphasis?: "featured" | "annual";
 };
 
 /** Prices are fixed by the business (USD) — text for each plan lives in the locale files. */
 export const PLANS: Plan[] = [
-  { id: "essential", oneTime: 299, monthly: 50 },
-  { id: "growth", oneTime: 399, monthly: 50 },
-  { id: "growth-plus", oneTime: 499, monthly: 50, emphasis: "featured" },
-  { id: "complete", oneTime: 1000, monthly: null, emphasis: "annual" },
+  { id: "essential", price: 297, billing: "monthly" },
+  { id: "growth", price: 397, billing: "monthly" },
+  { id: "premium", price: 497, billing: "monthly", emphasis: "featured" },
+  { id: "complete", price: 1997, billing: "one-time", includedMonths: 12, emphasis: "annual" },
 ];
 
 export function formatUSD(value: number): string {

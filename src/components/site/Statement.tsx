@@ -12,7 +12,7 @@ export function Statement() {
         <PeakLines className="absolute bottom-0 left-1/2 w-[760px] max-w-none -translate-x-1/2 translate-y-1/3 text-primary/20" />
         <div className="relative mx-auto max-w-4xl">
           <h2 className="font-display text-4xl leading-[1.06] text-balance sm:text-6xl lg:text-7xl">
-            {t.statement.titleBefore} <span className="text-gradient-brand">{t.statement.titleHighlight}</span>
+            {t.statement.titleBefore} <span className="text-primary">{t.statement.titleHighlight}</span>
           </h2>
           <p className="mx-auto mt-9 max-w-3xl text-xl leading-relaxed text-foreground/85 sm:text-2xl">
             {t.statement.p1}
