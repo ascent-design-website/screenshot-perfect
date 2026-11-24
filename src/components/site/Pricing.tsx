@@ -40,7 +40,7 @@ function PlanCard({ plan, index }: { plan: Plan; index: number }) {
 
       <div className="mt-6 rounded-2xl border border-hairline bg-background/50 p-5">
         <div className="flex flex-wrap items-baseline gap-x-2">
-          <span className="font-display text-5xl tracking-tight">{formatUSD(plan.price)}</span>
+          <span className="font-display text-[2.75rem] leading-none tracking-tight">{formatUSD(plan.price)}</span>
           <span className="text-sm text-muted-foreground">
             {plan.billing === "monthly" ? t.pricing.perMonth : t.pricing.oneTime}
           </span>

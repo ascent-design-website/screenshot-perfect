@@ -11,17 +11,17 @@ const plan = (id: string) => {
 };
 
 describe("Ascent Design pricing", () => {
-  it("Essential Website is $299 one-time + $50/month", () => {
-    expect(plan("essential")).toMatchObject({ oneTime: 299, monthly: 50 });
+  it("Essential is $297 per month", () => {
+    expect(plan("essential")).toMatchObject({ price: 297, billing: "monthly" });
   });
-  it("Growth is $399 one-time + $50/month", () => {
-    expect(plan("growth")).toMatchObject({ oneTime: 399, monthly: 50 });
+  it("Growth is $397 per month", () => {
+    expect(plan("growth")).toMatchObject({ price: 397, billing: "monthly" });
   });
-  it("Growth Plus is $499 one-time + $50/month", () => {
-    expect(plan("growth-plus")).toMatchObject({ oneTime: 499, monthly: 50 });
+  it("Premium is $497 per month", () => {
+    expect(plan("premium")).toMatchObject({ price: 497, billing: "monthly" });
   });
-  it("Ascent Complete is $1,000 one-time with no monthly fee", () => {
-    expect(plan("complete")).toMatchObject({ oneTime: 1000, monthly: null });
+  it("Complete is $1,997 one-time with 12 months of services included", () => {
+    expect(plan("complete")).toMatchObject({ price: 1997, billing: "one-time", includedMonths: 12 });
   });
   it("offers exactly four plans", () => {
     expect(PLANS).toHaveLength(4);
@@ -44,7 +44,7 @@ describe("Email CTA", () => {
     );
   });
   it("prefills the preferred package when given", () => {
-    expect(decodeURIComponent(buildMailto(undefined, "Growth Plus"))).toContain("Preferred package: Growth Plus");
+    expect(decodeURIComponent(buildMailto(undefined, "Premium"))).toContain("Preferred package: Premium");
   });
   it("uses the visitor's language for the email", () => {
     expect(decodeURIComponent(buildMailto(pt.email))).toContain("subject=Quero Meu Site Profissional");
