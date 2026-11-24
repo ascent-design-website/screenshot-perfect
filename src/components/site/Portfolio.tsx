@@ -1,7 +1,7 @@
 import { useI18n } from "@/lib/i18n";
 import { WORK } from "./work";
 
-/** Endless strip of concept-project mockups. Rendered at the bottom of the hero, like a live showcase. */
+/** Endless strip of website mockups. Rendered at the bottom of the hero, like a live showcase. */
 export function Showcase() {
   const { t } = useI18n();
   const loop = [...WORK, ...WORK];
@@ -19,7 +19,7 @@ export function Showcase() {
                     <div className="aspect-[3/2] overflow-hidden rounded-xl">
                       <img
                         src={w.src}
-                        alt={`${t.portfolio.concept}: ${w.brand} (${meta.category})`}
+                        alt={`${w.brand} (${meta.category})`}
                         width={1536}
                         height={1024}
                         loading={i < 3 ? "eager" : "lazy"}
@@ -27,9 +27,6 @@ export function Showcase() {
                         className="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-out group-hover/card:scale-[1.05]"
                       />
                     </div>
-                    <span className="pill absolute top-3.5 left-3.5 bg-background/80 py-0.5 text-[0.7rem] backdrop-blur-md">
-                      {t.portfolio.concept}
-                    </span>
                   </div>
                   <figcaption className="mt-3.5 flex items-baseline gap-2 px-1 text-left font-mono text-xs text-muted-foreground">
                     {meta.category} · <span className="text-foreground">{w.brand}</span>
@@ -40,7 +37,6 @@ export function Showcase() {
           })}
         </ul>
       </div>
-      <p className="mx-auto mt-8 max-w-xl px-5 text-center text-xs text-muted-foreground">{t.portfolio.note}</p>
     </div>
   );
 }

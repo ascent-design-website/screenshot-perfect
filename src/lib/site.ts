@@ -22,30 +22,37 @@ export function buildMailto(email: Dict["email"] = en.email, preferredPackage = 
 export const SECTION_IDS = ["home", "services", "process", "pricing", "about", "faq"] as const;
 export type SectionId = (typeof SECTION_IDS)[number];
 
-export type PlanId = "essential" | "growth" | "premium" | "complete";
+export type PlanId = "monthly" | "annual";
 
 export type Plan = {
   id: PlanId;
   price: number;
-  billing: "monthly" | "one-time";
-  /** Months of service covered by a one-time payment. */
-  includedMonths?: number;
-  emphasis?: "featured" | "annual";
+  billing: "monthly" | "yearly";
+  emphasis?: "featured";
 };
 
 /** Prices are fixed by the business (USD) — text for each plan lives in the locale files. */
 export const PLANS: Plan[] = [
-  { id: "essential", price: 297, billing: "monthly" },
-  { id: "growth", price: 397, billing: "monthly" },
-  { id: "premium", price: 497, billing: "monthly", emphasis: "featured" },
-  { id: "complete", price: 1997, billing: "one-time", includedMonths: 12, emphasis: "annual" },
+  { id: "monthly", price: 199, billing: "monthly" },
+  { id: "annual", price: 1799, billing: "yearly", emphasis: "featured" },
 ];
 
-export function formatUSD(value: number): string {
+/** What a year of monthly billing costs compared with the annual price. */
+export function annualSavings(plans: Plan[] = PLANS): { amount: number; percent: number } {
+  const monthly = plans.find((p) => p.billing === "monthly");
+  const yearly = plans.find((p) => p.billing === "yearly");
+  if (!monthly || !yearly) return { amount: 0, percent: 0 };
+  const fullYear = monthly.price * 12;
+  const amount = fullYear - yearly.price;
+  return { amount, percent: Math.round((amount / fullYear) * 100) };
+}
+
+export function formatUSD(value: number, decimals = 0): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    maximumFractionDigits: 0,
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
   }).format(value);
 }
 

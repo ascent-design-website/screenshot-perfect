@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
-import { PLANS, buildMailto, formatUSD, type Plan } from "@/lib/site";
+import { PLANS, annualSavings, buildMailto, formatUSD, type Plan } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
@@ -11,52 +11,49 @@ function PlanCard({ plan, index }: { plan: Plan; index: number }) {
   const { t } = useI18n();
   const copy = t.pricing.plans[plan.id];
   const featured = plan.emphasis === "featured";
-  const annual = plan.emphasis === "annual";
+  const yearly = plan.billing === "yearly";
+  const savings = annualSavings();
 
   return (
     <Reveal
       delay={index * 90}
       as="article"
       className={cn(
-        "group card-premium flex flex-col p-7 transition-all duration-500 hover:-translate-y-1 sm:p-8",
-        annual && "border-pink/60 shadow-glow-pink",
-        featured && "border-primary/50 shadow-glow",
-        !annual && !featured && "hover:border-foreground/20",
+        "group card-premium flex flex-col p-7 transition-all duration-500 hover:-translate-y-1 sm:p-9",
+        featured ? "border-pink/60 shadow-glow-pink" : "hover:border-foreground/20",
       )}
     >
-      {copy.badge ? (
-        <span
-          className={cn(
-            "absolute -top-3.5 left-7 rounded-full px-3.5 py-1 text-[0.68rem] font-bold tracking-[0.12em] text-primary-foreground uppercase",
-            annual ? "bg-pink" : "bg-brand-button",
-          )}
-        >
-          {copy.badge}
+      {yearly ? (
+        <span className="absolute -top-3.5 left-7 rounded-full bg-pink px-3.5 py-1 text-[0.7rem] font-bold tracking-[0.08em] text-primary-foreground uppercase sm:left-9">
+          {t.pricing.savings
+            .replace("{amount}", formatUSD(savings.amount))
+            .replace("{percent}", String(savings.percent))}
         </span>
       ) : null}
 
       <h3 className="text-2xl font-semibold tracking-tight">{copy.name}</h3>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:min-h-[4.5rem]">{copy.description}</p>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{copy.description}</p>
 
       <div className="mt-6 rounded-2xl border border-hairline bg-background/50 p-5">
         <div className="flex flex-wrap items-baseline gap-x-2">
-          <span className="font-display text-[2.75rem] leading-none tracking-tight">{formatUSD(plan.price)}</span>
-          <span className="text-sm text-muted-foreground">
-            {plan.billing === "monthly" ? t.pricing.perMonth : t.pricing.oneTime}
-          </span>
+          <span className="font-display text-5xl leading-none tracking-tight">{formatUSD(plan.price)}</span>
+          <span className="text-sm text-muted-foreground">{yearly ? t.pricing.perYear : t.pricing.perMonth}</span>
         </div>
-        <p className={cn("mt-3 text-sm font-medium", annual ? "text-pink" : "text-muted-foreground")}>
-          {plan.billing === "monthly" ? t.pricing.monthlyNote : t.pricing.oneTimeNote}
+        <p className={cn("mt-3 text-sm font-medium", yearly ? "text-pink" : "text-muted-foreground")}>
+          {yearly
+            ? t.pricing.yearlyNote.replace("{monthly}", formatUSD(plan.price / 12, 2))
+            : t.pricing.monthlyNote}
         </p>
       </div>
 
-      <ul className="mt-7 flex-1 space-y-3.5">
-        {copy.features.map((f) => (
+      <p className="mt-7 text-sm font-semibold">{t.pricing.featuresTitle}</p>
+      <ul className="mt-4 flex-1 space-y-3.5">
+        {t.pricing.features.map((f) => (
           <li key={f} className="flex items-start gap-3 text-sm text-foreground/90">
             <span
               className={cn(
                 "mt-0.5 inline-flex size-4.5 shrink-0 items-center justify-center rounded-full text-primary-foreground",
-                annual ? "bg-pink" : "bg-primary",
+                yearly ? "bg-pink" : "bg-primary",
               )}
             >
               <Check className="size-2.5" strokeWidth={3.5} />
@@ -66,15 +63,9 @@ function PlanCard({ plan, index }: { plan: Plan; index: number }) {
         ))}
       </ul>
 
-      {copy.note ? (
-        <p className="mt-6 rounded-2xl border border-hairline bg-background/50 p-4 text-xs leading-relaxed text-muted-foreground">
-          {copy.note}
-        </p>
-      ) : null}
-
       <Button
         asChild
-        variant={featured || annual ? "brand" : "outlineLight"}
+        variant={featured ? "brand" : "outlineLight"}
         size="xl"
         className="mt-8 h-auto min-h-13 w-full py-3 text-center whitespace-normal"
       >
@@ -92,20 +83,7 @@ export function Pricing() {
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading title={t.pricing.title} text={t.pricing.text} />
 
-        <Reveal className="mx-auto mt-10 flex w-fit max-w-full flex-col gap-3 rounded-3xl border border-hairline bg-surface/60 px-5 py-3 text-sm backdrop-blur sm:flex-row sm:gap-8 sm:rounded-full">
-          <span className="flex items-center gap-2.5">
-            <span className="size-2 rounded-full bg-primary" aria-hidden="true" />
-            <strong className="font-semibold">{t.pricing.legendMonthly}</strong>
-            <span className="text-muted-foreground">{t.pricing.legendMonthlyText}</span>
-          </span>
-          <span className="flex items-center gap-2.5">
-            <span className="size-2 rounded-full bg-pink" aria-hidden="true" />
-            <strong className="font-semibold">{t.pricing.legendOneTime}</strong>
-            <span className="text-muted-foreground">{t.pricing.legendOneTimeText}</span>
-          </span>
-        </Reveal>
-
-        <div className="mt-16 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mx-auto mt-16 grid max-w-4xl gap-6 md:grid-cols-2">
           {PLANS.map((p, i) => (
             <PlanCard key={p.id} plan={p} index={i} />
           ))}
