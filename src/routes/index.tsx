@@ -17,9 +17,9 @@ import { Testimonials } from "@/components/site/Testimonials";
 import { Value } from "@/components/site/Value";
 import { WhyChoose } from "@/components/site/WhyChoose";
 
-const TITLE = "Ascent Design | Professional Websites & Digital Content for Local Businesses";
+const TITLE = "Ascent Design | Websites & Local SEO for Local Businesses";
 const DESCRIPTION =
-  "Ascent Design creates professional websites, SEO-focused blog content, and social media content for local businesses across the United States.";
+  "Website design or rebuild, local SEO, Google Business Profile, missed-call text back, review requests and unlimited edits for local businesses. From $199/month.";
 
 export const Route = createFileRoute("/")({
   head: () => ({

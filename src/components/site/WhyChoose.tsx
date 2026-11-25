@@ -1,10 +1,10 @@
-import { Gauge, LifeBuoy, Megaphone, PenTool, Search, Smartphone } from "lucide-react";
+import { LifeBuoy, MapPin, PenTool, PhoneMissed, Smartphone, Star } from "lucide-react";
 
 import { useI18n } from "@/lib/i18n";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 
-const ICONS = [PenTool, Smartphone, Gauge, Search, LifeBuoy, Megaphone];
+const ICONS = [PenTool, Smartphone, MapPin, PhoneMissed, Star, LifeBuoy];
 
 export function WhyChoose() {
   const { t } = useI18n();

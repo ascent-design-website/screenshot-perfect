@@ -1,4 +1,4 @@
-import { ArrowUpRight, Check, Globe, Instagram, Newspaper } from "lucide-react";
+import { ArrowUpRight, Check, Globe, MapPin, MessagesSquare } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
@@ -6,7 +6,7 @@ import { buildMailto } from "@/lib/site";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 
-const ICONS = [Globe, Newspaper, Instagram];
+const ICONS = [Globe, MapPin, MessagesSquare];
 
 export function Services() {
   const { t } = useI18n();
