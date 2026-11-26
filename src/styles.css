@@ -86,7 +86,7 @@
   --radius: 0.875rem;
 
   --blue: oklch(0.623 0.127 232.2);
-  --white: oklch(0.998 0.003 197.1);
+  --white: oklch(1 0 0);
   --pink: oklch(0.61 0.212 349.8);
   --ink: oklch(0.163 0.023 259.9);
 
@@ -135,10 +135,10 @@
   --shadow-mockup: 0 30px 60px -30px oklch(0.163 0.023 259.9 / 35%), 0 0 0 1px var(--hairline);
 }
 
-/* ---------- Dark theme (default): black #08080B ---------- */
+/* ---------- Dark theme (default): black #08090B ---------- */
 .dark {
   color-scheme: dark;
-  --background: oklch(0.136 0.007 285.5);
+  --background: oklch(0.141 0.004 258);
   --foreground: var(--white);
   --surface: oklch(0.178 0.006 260);
   --surface-raised: oklch(0.225 0.009 260);
@@ -160,7 +160,7 @@
   --sidebar-accent: var(--surface-raised);
   --sidebar-accent-foreground: var(--white);
 
-  --glow-strength: 1;
+  --glow-strength: 0.7;
   --star-opacity: 0.6;
   --card-highlight: oklch(1 0 0 / 6%);
   --shadow-card: 0 30px 60px -40px oklch(0 0 0 / 90%);
@@ -246,77 +246,16 @@
   box-shadow: 0 10px 36px -12px color-mix(in oklab, var(--pink) calc(var(--glow-strength) * 60%), transparent);
 }
 
-/* Falling star dots behind the hero planet (see FallingStars.tsx). */
-.falling-stars {
-  opacity: calc(var(--star-opacity) * 1.6);
-}
-
-.falling-star {
-  position: absolute;
-  top: 0;
-  border-radius: 9999px;
-  background: oklch(1 0 0);
-  box-shadow: 0 0 6px 1px oklch(1 0 0 / 45%);
-  opacity: 0;
-  animation: star-fall var(--duration) linear var(--delay) infinite;
-}
-
-@keyframes star-fall {
-  0% {
-    transform: translate3d(0, -24px, 0);
-    opacity: 0;
-  }
-  12%,
-  80% {
-    opacity: var(--peak);
-  }
-  100% {
-    transform: translate3d(var(--drift), var(--distance), 0);
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .falling-star {
-    animation: none;
-    opacity: var(--peak);
-    transform: translate3d(0, calc(var(--distance) * 0.3), 0);
-  }
-}
-
 /* ---------- Atmosphere ---------- */
+/* Space effects retired for a clean agency look; utilities kept as no-ops. */
 @utility starfield {
-  opacity: var(--star-opacity);
-  background-image:
-    radial-gradient(1px 1px at 23px 41px, oklch(1 0 0 / 90%), transparent),
-    radial-gradient(1px 1px at 141px 88px, oklch(1 0 0 / 60%), transparent),
-    radial-gradient(1.5px 1.5px at 67px 163px, oklch(1 0 0 / 80%), transparent),
-    radial-gradient(1px 1px at 201px 201px, oklch(1 0 0 / 50%), transparent),
-    radial-gradient(1px 1px at 101px 247px, oklch(1 0 0 / 70%), transparent),
-    radial-gradient(1.5px 1.5px at 251px 31px, oklch(0.85 0.08 230 / 80%), transparent),
-    radial-gradient(1px 1px at 283px 141px, oklch(1 0 0 / 40%), transparent);
-  background-size: 300px 300px;
+  display: none;
 }
-
-/* The glowing "planet horizon" arc. Place on a large square element; only the top edge shows. */
 @utility horizon {
-  border-radius: 50%;
-  background:
-    radial-gradient(48% 14% at 50% 0%, color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 22%), transparent), transparent),
-    var(--background);
-  box-shadow:
-    0 -1px 0 0 color-mix(in oklab, var(--blue) 45%, white),
-    0 -6px 24px 0 color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 80%), transparent),
-    0 -30px 90px 0 color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 45%), transparent),
-    0 -80px 200px 30px color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 18%), transparent),
-    inset 0 2px 6px 0 color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 70%), transparent),
-    inset 0 30px 80px -40px color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 55%), transparent);
+  display: none;
 }
-
-/* Soft light pooling above the horizon crest. */
 @utility horizon-halo {
-  background: radial-gradient(50% 60% at 50% 100%, color-mix(in oklab, var(--blue) calc(var(--glow-strength) * 26%), transparent), transparent 70%);
-  filter: blur(10px);
+  display: none;
 }
 
 @utility glow-blue {

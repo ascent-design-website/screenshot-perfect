@@ -14,7 +14,7 @@ export function About() {
             className="horizon absolute top-[58%] left-1/2 aspect-square w-[180%] -translate-x-1/2"
             aria-hidden="true"
           />
-          <PeakLines className="absolute inset-x-[10%] top-[8%] animate-float-slow text-foreground/15" />
+          <PeakLines className="absolute inset-x-[10%] top-[8%] text-foreground/15" />
           <BrandSymbol className="absolute top-[44%] left-1/2 w-[42%] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_20px_40px_color-mix(in_oklab,var(--blue)_40%,transparent)]" />
         </Reveal>
 
