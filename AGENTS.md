@@ -35,3 +35,4 @@ use the editor.
 - Every conversion button uses `buildMailto()` (no forms/backends) — the brief requires the visitor's email app.
 - Testimonials section renders only when `TESTIMONIALS` has real entries — never add invented quotes.
 - Brand images and the Brice font are Lovable Assets pointers in `src/assets/`; the light wordmark is a recolored copy of the uploaded logo for dark backgrounds.
+- Hero rotation uses localized phrase arrays and overlapping grid tracks to reserve the longest phrase's space; reduced-motion preferences disable automatic rotation to keep the headline accessible and stable.

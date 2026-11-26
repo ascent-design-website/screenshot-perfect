@@ -18,9 +18,8 @@ export const es: Dict = {
     skip: "Saltar al contenido",
   },
   hero: {
-    titleBefore: "Tu Negocio Merece una Presencia Digital",
-    titleHighlight: "Mejor",
-    titleAfter: "",
+    titleBefore: "Impulsados a ayudarte a",
+    rotatingPhrases: ["Conseguir más clientes", "Destacar en línea", "Vender más", "Construir una marca más fuerte", "Expandir tu negocio"],
     text: "Diseñamos o rediseñamos tu sitio web y configuramos las herramientas que ayudan a los clientes de tu zona a encontrarte en Google, contactarte fácilmente y dejarte reseñas.",
     cta: "Quiero Mi Sitio Web Profesional",
     secondary: "Conoce Nuestros Servicios",

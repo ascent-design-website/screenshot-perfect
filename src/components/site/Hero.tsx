@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
@@ -7,6 +8,27 @@ import { Showcase } from "./Portfolio";
 
 export function Hero() {
   const { t } = useI18n();
+  const [activePhrase, setActivePhrase] = useState(0);
+
+  useEffect(() => {
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let timer: ReturnType<typeof setInterval> | undefined;
+    const start = () => {
+      if (timer !== undefined) clearInterval(timer);
+      setActivePhrase(0);
+      if (!motion.matches) {
+        timer = setInterval(() => {
+          setActivePhrase((current) => (current + 1) % t.hero.rotatingPhrases.length);
+        }, 3000);
+      }
+    };
+    start();
+    motion.addEventListener("change", start);
+    return () => {
+      if (timer !== undefined) clearInterval(timer);
+      motion.removeEventListener("change", start);
+    };
+  }, [t.hero.rotatingPhrases]);
 
   return (
     <section id="home" className="relative isolate overflow-hidden pt-44 pb-20 sm:pt-56 sm:pb-28">
@@ -18,9 +40,20 @@ export function Hero() {
       <div className="glow-blue absolute -top-40 left-1/2 -z-20 h-[420px] w-[900px] -translate-x-1/2" aria-hidden="true" />
 
       <div className="mx-auto max-w-5xl px-5 text-center sm:px-8">
-        <h1 className="mx-auto max-w-5xl animate-in font-display text-[2.5rem] leading-[1.06] text-balance delay-100 duration-1000 fill-mode-both fade-in slide-in-from-bottom-6 sm:text-6xl lg:text-[4.25rem]">
-          {t.hero.titleBefore} <span className="text-primary">{t.hero.titleHighlight}</span>
-          {t.hero.titleAfter ? ` ${t.hero.titleAfter}` : ""}
+        <h1 className="mx-auto max-w-5xl animate-in font-display text-[1.625rem] leading-[1.15] tracking-normal text-balance delay-100 duration-1000 fill-mode-both fade-in slide-in-from-bottom-6 sm:text-5xl lg:text-[4.25rem]">
+          <span className="sr-only">{t.hero.titleBefore}: {t.hero.rotatingPhrases.join(", ")}.</span>
+          <span aria-hidden="true" className="block">{t.hero.titleBefore}</span>
+          <span aria-hidden="true" className="mt-2 grid overflow-hidden text-primary sm:mt-3">
+            {t.hero.rotatingPhrases.map((phrase, index) => (
+              <span
+                key={phrase}
+                data-active={index === activePhrase}
+                className="invisible col-start-1 row-start-1 translate-y-3 opacity-0 transition-[opacity,transform,visibility] duration-500 data-[active=true]:visible data-[active=true]:translate-y-0 data-[active=true]:opacity-100 motion-reduce:transform-none motion-reduce:transition-none"
+              >
+                {phrase}
+              </span>
+            ))}
+          </span>
         </h1>
         <p className="mx-auto mt-7 max-w-xl animate-in text-base leading-relaxed text-pretty text-muted-foreground delay-200 duration-1000 fill-mode-both fade-in slide-in-from-bottom-6 sm:text-lg">
           {t.hero.text}

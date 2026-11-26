@@ -16,9 +16,8 @@ export const en = {
     skip: "Skip to content",
   },
   hero: {
-    titleBefore: "Your Business Deserves a",
-    titleHighlight: "Better",
-    titleAfter: "Digital Presence.",
+    titleBefore: "Driven to help you",
+    rotatingPhrases: ["Get more clients", "Stand out online", "Sell more", "Build a stronger brand", "Scale your business"],
     text: "We design or rebuild your website and set up the tools that help local customers find you on Google, reach you easily, and leave you reviews.",
     cta: "I Want My Professional Website",
     secondary: "Explore Our Services",

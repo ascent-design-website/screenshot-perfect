@@ -17,3 +17,7 @@
 - [x] Hero redesign closer to reference (badge, 2-line title, glowing horizon, project showcase in hero)
 - [x] Remove hero tagline line
 - [x] Dark theme background black (#08090A, awaiting confirmation of exact hex)
+
+## Current headline update
+- [x] Static first line and sequential rotating second line in all three languages
+- [x] Verify phrase order and stable headline layout on desktop and mobile; translations and reduced-motion preference checked
