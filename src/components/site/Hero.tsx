@@ -39,23 +39,24 @@ export function Hero() {
       />
       <div className="glow-blue absolute -top-40 left-1/2 -z-20 h-[420px] w-[900px] -translate-x-1/2" aria-hidden="true" />
 
-      <div className="mx-auto max-w-5xl px-5 text-center sm:px-8">
-        <h1 className="mx-auto max-w-5xl animate-in font-display text-[1.625rem] leading-[1.15] tracking-normal text-balance delay-100 duration-1000 fill-mode-both fade-in slide-in-from-bottom-6 sm:text-5xl lg:text-[4.25rem]">
+      <div className="mx-auto max-w-[1400px] px-5 text-center sm:px-8">
+        <h1 className="mx-auto min-w-0 animate-in font-display text-[2rem] leading-[1.08] tracking-normal text-balance delay-100 duration-1000 fill-mode-both fade-in slide-in-from-bottom-6 min-[480px]:text-[2.5rem] sm:text-[3.25rem] md:text-[4rem] lg:text-[4.75rem] xl:text-[5rem]">
           <span className="sr-only">{t.hero.titleBefore}: {t.hero.rotatingPhrases.join(", ")}.</span>
           <span aria-hidden="true" className="block">{t.hero.titleBefore}</span>
-          <span aria-hidden="true" className="mt-2 grid overflow-hidden text-primary sm:mt-3">
+          <span aria-hidden="true" className="grid overflow-hidden py-[0.08em] text-primary">
             {t.hero.rotatingPhrases.map((phrase, index) => (
               <span
                 key={phrase}
                 data-active={index === activePhrase}
-                className="invisible col-start-1 row-start-1 translate-y-3 opacity-0 transition-[opacity,transform,visibility] duration-500 data-[active=true]:visible data-[active=true]:translate-y-0 data-[active=true]:opacity-100 motion-reduce:transform-none motion-reduce:transition-none"
+                data-previous={index === (activePhrase - 1 + t.hero.rotatingPhrases.length) % t.hero.rotatingPhrases.length}
+                className="col-start-1 row-start-1 min-w-0 translate-y-[0.22em] opacity-0 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] data-[previous=true]:-translate-y-[0.22em] data-[active=true]:translate-y-0 data-[active=true]:opacity-100 motion-reduce:transform-none motion-reduce:transition-none"
               >
                 {phrase}
               </span>
             ))}
           </span>
         </h1>
-        <p className="mx-auto mt-7 max-w-xl animate-in text-base leading-relaxed text-pretty text-muted-foreground delay-200 duration-1000 fill-mode-both fade-in slide-in-from-bottom-6 sm:text-lg">
+        <p className="mx-auto mt-6 max-w-4xl animate-in text-base leading-relaxed text-balance text-muted-foreground delay-200 duration-1000 fill-mode-both fade-in slide-in-from-bottom-6 sm:text-lg">
           {t.hero.text}
         </p>
 

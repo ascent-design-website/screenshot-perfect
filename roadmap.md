@@ -21,3 +21,7 @@
 ## Current headline update
 - [x] Static first line and sequential rotating second line in all three languages
 - [x] Verify phrase order and stable headline layout on desktop and mobile; translations and reduced-motion preference checked
+
+## Headline refinement
+- [ ] Enlarge headline, tighten line spacing, and soften upward phrase transitions
+- [ ] Widen supporting text to two desktop lines and verify all languages on desktop/mobile
